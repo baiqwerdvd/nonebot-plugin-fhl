@@ -23,7 +23,7 @@ from nonebot_plugin_session import SessionId, SessionIdType
 from .logic import FeiHuaLing
 from .config import Config
 
-__version__ = "0.1.7"
+__version__ = "0.1.8"
 
 __plugin_meta__ = PluginMetadata(
     name="Fei Hua Ling",
@@ -146,7 +146,7 @@ async def fhl_1(
     global poery_word
     poery_word = on_regex(
         r"(?P<poetry>[\u4e00-\u9fa5]+)",
-        rule=game_is_running,
+        rule=to_me() & game_is_running,
         block=True,
         priority=14,
     )
@@ -154,6 +154,18 @@ async def fhl_1(
 
     msg = f"题目：{game_instance.subject}"
     await UniMessage.text(msg).send()
+
+
+@fhl_stop.handle()
+async def _(matcher: Matcher, user_id: UserId):
+    game = games[user_id]
+    stop_game(user_id)
+
+    msg = "游戏已结束"
+    if len(game.history) >= 1:
+        for i in game.history:
+            msg += i + "\n"
+    await matcher.finish(msg)
 
 
 async def handle_poery(
