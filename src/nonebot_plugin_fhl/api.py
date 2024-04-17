@@ -1,7 +1,7 @@
 import httpx
 from msgspec import convert
 
-from .config import Config
+from .config import config
 from .model import (
     GetTopicRequest,
     GetTopicResponse,
@@ -12,7 +12,7 @@ from .model import (
 
 class FHLApi:
     def __init__(self) -> None:
-        self.client = httpx.AsyncClient(base_url=Config.feihualing_api)
+        self.client = httpx.AsyncClient(base_url=config.feihualing_api)
 
     async def get_topic(
         self,

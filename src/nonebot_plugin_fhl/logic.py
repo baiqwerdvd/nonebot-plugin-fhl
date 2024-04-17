@@ -1,4 +1,4 @@
-from .config import Config
+from .config import config
 from .api import api
 
 
@@ -8,7 +8,7 @@ class FeiHuaLing:
     turn_timer: int
 
     def __init__(self, user_id: str, game_mode: str, poetry_size: int) -> None:
-        self.api = Config.feihualing_api
+        self.api = config.feihualing_api
         self.game_id = user_id
         self.game_mode = game_mode
         self.poetry_size = poetry_size

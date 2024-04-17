@@ -68,16 +68,16 @@ fhl_mode_1 = on_alconna(
     block=True,
     priority=13,
 )
-fhl_mode_2 = on_alconna(
-    Alconna(
-        "走马观花",
-        Option("-l|--length", Args["length", int], help_text="诗句长度"),
-    ),
-    rule=to_me() & game_not_running,
-    use_cmd_start=True,
-    block=True,
-    priority=13,
-)
+# fhl_mode_2 = on_alconna(
+#     Alconna(
+#         "走马观花",
+#         Option("-l|--length", Args["length", int], help_text="诗句长度"),
+#     ),
+#     rule=to_me() & game_not_running,
+#     use_cmd_start=True,
+#     block=True,
+#     priority=13,
+# )
 # fhl_mode_3 = on_alconna(
 #     Alconna(
 #         "天女散花",
