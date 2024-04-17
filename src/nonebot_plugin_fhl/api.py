@@ -1,5 +1,5 @@
 import httpx
-from msgspec import convert
+from msgspec import convert, json
 
 from .config import config
 from .model import (
@@ -27,7 +27,7 @@ class FHLApi:
         )
         response = await self.client.post(
             "/gettopic",
-            json=data,
+            json=json.encode(data),
         )
         return convert(response.json(), GetTopicResponse)
 
@@ -42,7 +42,7 @@ class FHLApi:
         )
         response = await self.client.post(
             "/answer",
-            json=data,
+            json=json.encode(data),
         )
         return convert(response.json(), AnswerResponse)
 
