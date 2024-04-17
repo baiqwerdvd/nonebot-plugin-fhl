@@ -9,6 +9,7 @@ from nonebot.plugin import PluginMetadata, inherit_supported_adapters
 from nonebot.rule import to_me
 
 require("nonebot_plugin_alconna")
+require("nonebot_plugin_session")
 
 from nonebot_plugin_alconna import (
     Alconna,
