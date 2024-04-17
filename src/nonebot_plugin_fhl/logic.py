@@ -1,10 +1,11 @@
+from typing import List
 from .config import config
 from .api import api
 
 
 class FeiHuaLing:
     subject: str
-    history: list[str]
+    history: List[str]
     turn_timer: int
 
     def __init__(self, user_id: str, game_mode: str, poetry_size: int) -> None:
@@ -27,4 +28,5 @@ class FeiHuaLing:
             self.game_id,
             answer,
         )
+        self.history = resp.data.history
         return resp

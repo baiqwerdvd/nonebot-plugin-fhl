@@ -1,3 +1,4 @@
+from typing import List
 from msgspec import Struct, field
 
 
@@ -58,7 +59,7 @@ class AnswerData(Struct):
     update: str
     """特殊标识"""
 
-    history: list[str]
+    history: List[str]
     """历史正确回答"""
 
     user: int

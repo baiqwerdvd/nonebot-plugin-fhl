@@ -1,6 +1,7 @@
 import asyncio
-from typing import Annotated, Any, Optional
+from typing import Any, Dict, Optional, Type
 from asyncio import TimerHandle
+from typing_extensions import Annotated
 
 from nonebot import on_regex, require
 from nonebot.matcher import Matcher
@@ -13,12 +14,6 @@ require("nonebot_plugin_session")
 
 from nonebot_plugin_alconna import (
     Alconna,
-    AlconnaQuery,
-    Args,
-    Image,
-    Option,
-    Query,
-    Text,
     UniMessage,
     on_alconna,
 )
@@ -28,7 +23,7 @@ from nonebot_plugin_session import SessionId, SessionIdType
 from .logic import FeiHuaLing
 from .config import Config
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 __plugin_meta__ = PluginMetadata(
     name="Fei Hua Ling",
@@ -48,8 +43,8 @@ __plugin_meta__ = PluginMetadata(
     ),
 )
 
-games: dict[str, FeiHuaLing] = {}
-timers: dict[str, TimerHandle] = {}
+games: Dict[str, FeiHuaLing] = {}
+timers: Dict[str, TimerHandle] = {}
 
 UserId = Annotated[str, SessionId(SessionIdType.GROUP)]
 
@@ -107,7 +102,7 @@ fhl_stop = on_alconna(
     block=True,
     priority=13,
 )
-wordle_word: Optional[type[Matcher]] = None
+wordle_word: Optional[Type[Matcher]] = None
 
 
 def stop_game(user_id: str):
@@ -162,7 +157,7 @@ async def fhl_1(
 
 
 async def handle_poery(
-    matcher: Matcher, user_id: UserId, matched: dict[str, Any] = RegexDict()
+    matcher: Matcher, user_id: UserId, matched: Dict[str, Any] = RegexDict()
 ):
     game = games[user_id]
     set_timeout(matcher, user_id)
