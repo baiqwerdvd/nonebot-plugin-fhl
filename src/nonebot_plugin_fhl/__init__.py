@@ -23,10 +23,10 @@ from nonebot_plugin_session import SessionId, SessionIdType
 from .logic import FeiHuaLing
 from .config import Config
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 __plugin_meta__ = PluginMetadata(
-    name="Fei Hua Ling",
+    name="飞花令",
     description="飞花令小游戏",
     usage="""
     /梦笔生花,
