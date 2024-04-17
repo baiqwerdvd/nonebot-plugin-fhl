@@ -10,6 +10,7 @@ class FeiHuaLing:
 
     def __init__(self, user_id: str, game_mode: str, poetry_size: int) -> None:
         self.api = config.feihualing_api
+        self.history = []
         self.game_id = user_id
         self.game_mode = game_mode
         self.poetry_size = poetry_size
