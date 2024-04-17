@@ -1,0 +1,49 @@
+[project]
+name = "nonebot-plugin-fhl"
+dynamic = ["version"]
+description = "Nonebot plugin for fhl"
+authors = [
+    {name = "baiqwerdvd", email = "158065462+baiqwerdvd@users.noreply.github.com"},
+]
+dependencies = [
+    "nonebot2>=2.2.1",
+]
+requires-python = ">=3.9"
+readme = "README.md"
+license = {text = "MIT"}
+keywords = [
+    "nonebot",
+    "fei hua ling",
+]
+
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm.build]
+includes = ["src/nonebot_plugin_fhl"]
+
+[tool.pdm.version]
+source = "file"
+path = "src/nonebot_plugin_fhl/__init__.py"
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "ruff>=0.3.7",
+]
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "UP", "C", "T", "PYI", "PT", "Q"]
+ignore = ["C901", "T201", "E731", "E402"]
+
+[tool.pyright]
+pythonVersion = "3.9"
+pythonPlatform = "All"
+defineConstant = { PYDANTIC_V2 = true }
+typeCheckingMode = "basic"
+reportShadowedImports = false
+disableBytesTypePromotions = true
