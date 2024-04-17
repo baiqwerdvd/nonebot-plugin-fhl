@@ -23,7 +23,7 @@ from nonebot_plugin_session import SessionId, SessionIdType
 from .logic import FeiHuaLing
 from .config import Config
 
-__version__ = "0.1.9"
+__version__ = "0.2.0"
 
 __plugin_meta__ = PluginMetadata(
     name="Fei Hua Ling",
@@ -102,15 +102,15 @@ fhl_stop = on_alconna(
     block=True,
     priority=13,
 )
-wordle_word: Optional[Type[Matcher]] = None
+poery_word: Optional[Type[Matcher]] = None
 
 
 def stop_game(user_id: str):
     if timer := timers.pop(user_id, None):
         timer.cancel()
     games.pop(user_id, None)
-    if wordle_word:
-        wordle_word.destroy()
+    if poery_word:
+        poery_word.destroy()
 
 
 async def stop_game_timeout(matcher: Matcher, user_id: str):
@@ -161,10 +161,10 @@ async def _(matcher: Matcher, user_id: UserId):
     game = games[user_id]
     stop_game(user_id)
 
-    msg = "游戏已结束"
+    msg = "游戏已结束" + "\n"
     if len(game.history) >= 1:
         for i in game.history:
-            msg += i + "\n"
+            msg += "\n" + i
     await matcher.finish(msg)
 
 
@@ -177,6 +177,13 @@ async def handle_poery(
     poetry = str(matched["poetry"])
     result = await game.answer(poetry)
     code = result.code
+
+    if len(result.data.history) > 10:
+        msg = "已经答出10句, 本局游戏结束\n"
+        if len(game.history) >= 1:
+            for i in game.history:
+                msg += "\n" + i
+        await matcher.finish(msg)
 
     if code == 200:
         tup = ""
