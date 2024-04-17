@@ -23,7 +23,7 @@ from nonebot_plugin_session import SessionId, SessionIdType
 from .logic import FeiHuaLing
 from .config import Config
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 __plugin_meta__ = PluginMetadata(
     name="Fei Hua Ling",
@@ -95,8 +95,7 @@ fhl_mode_1 = on_alconna(
 #     priority=13,
 # )
 fhl_stop = on_alconna(
-    "结束",
-    aliases=("结束游戏", "结束飞花令"),
+    "结束飞花令",
     rule=game_is_running,
     use_cmd_start=True,
     block=True,
@@ -179,6 +178,7 @@ async def handle_poery(
     code = result.code
 
     if len(result.data.history) > 10:
+        stop_game(user_id)
         msg = "已经答出10句, 本局游戏结束\n"
         if len(game.history) >= 1:
             for i in game.history:
@@ -192,7 +192,7 @@ async def handle_poery(
         history = ""
         for i in result.data.history:
             history += i + "\n"
-        msg = f"题目: {result.data.subjectstring}\n历史: {history}{tup}"
+        msg = f"题目: {result.data.subjectstring}\n历史:\n{history}{tup}"
         await UniMessage.text(msg).send()
     elif code == 201:
         # 不切题
