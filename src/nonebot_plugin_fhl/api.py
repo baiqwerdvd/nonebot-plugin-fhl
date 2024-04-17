@@ -27,7 +27,7 @@ class FHLApi:
         )
         response = await self.client.post(
             "/gettopic",
-            json=json.encode(data),
+            data=json.decode(json.encode(data)),
         )
         return convert(response.json(), GetTopicResponse)
 
@@ -42,7 +42,7 @@ class FHLApi:
         )
         response = await self.client.post(
             "/answer",
-            json=json.encode(data),
+            data=json.decode(json.encode(data)),
         )
         return convert(response.json(), AnswerResponse)
 

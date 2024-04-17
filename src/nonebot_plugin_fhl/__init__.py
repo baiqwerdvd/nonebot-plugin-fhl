@@ -23,7 +23,7 @@ from nonebot_plugin_session import SessionId, SessionIdType
 from .logic import FeiHuaLing
 from .config import Config
 
-__version__ = "0.1.5"
+__version__ = "0.1.6"
 
 __plugin_meta__ = PluginMetadata(
     name="Fei Hua Ling",
@@ -167,6 +167,7 @@ async def handle_poery(
     code = result.code
 
     if code == 200:
+        tup = ""
         if result.data.reason != "":
             tup = f"\nUpdate: {result.data.update}"
         msg = f"题目: {result.data.subjectstring}\n历史: {result.data.history}\n{tup}"
