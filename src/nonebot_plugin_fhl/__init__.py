@@ -23,7 +23,7 @@ from nonebot_plugin_session import SessionId, SessionIdType
 from .logic import FeiHuaLing
 from .config import Config
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 __plugin_meta__ = PluginMetadata(
     name="Fei Hua Ling",
